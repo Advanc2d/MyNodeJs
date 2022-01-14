@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        table{
+            border-collapse : collapse;
+        }
+        th{
+            background: rgb(107, 184, 230);
+            font-weight: bold;
+            text-align: center;
+            border :1px solid rgb(128, 209, 255);
+            width : 70px;
+            height: 40px;
+        }
+        td{
+            border :1px solid rgb(128, 209, 255);
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        window.onload = function(){
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status ==200){
+                    var ss = '';
+                    console.log("여긴왔니?");
+                    var parser = new DOMParser();
+                    var xml = parser.parseFromString(request.responseText,'application/xml');
+                    var daegus = xml.getElementsByTagName('daegu');
+                    var incheons = xml.getElementsByTagName("incheon");
+                    var gwangjus = xml.getElementsByTagName('gwangju');
+                    var ulsans = xml.getElementsByTagName('ulsan');
+                    var seouls = xml.getElementsByTagName('seoul');
+                    var busans = xml.getElementsByTagName('busan');
+                    ss+='<p>측정항목 : CO /시간평균(일주일)';
+                    ss += '<table><tr><th>대구</th><th>인천</th><th>광주</th><th>울산</th><th>서울</th><th>부산</th></tr>';
+                    console.log(daegus.length);
+                    for(var i=0;i<daegus.length; i++){
+                        console.log("여긴왔니?2");
+                        var daegu = daegus[i].textContent;
+                        var incheon = incheons[i].textContent;
+                        var gwangju = gwangjus[i].textContent;
+                        var ulsan = ulsans[i].textContent;
+                        var seoul = seouls[i].textContent;
+                        var busan = busans[i].textContent;
+                        ss += '<tr><td>'+ daegu + '</td><td>' + incheon+ '</td><td>' 
+                            + gwangju+ '</td><td>' + ulsan + '</td><td>' + seoul+ '</td><td>' + busan+ '</td></tr>';                    
+                    }
+                    ss += '</table>';
+                    console.log(ss);
+                    document.body.innerHTML += ss;
+                }
+
+            }
+            request.open("get","http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?serviceKey=30lXFU1237XUK7czFEJ0%2B8C3mz05U86qlMRZ%2Bjp9nKxO8EJEItLq1ZWsAYSbkJ7%2FeZCEBoD3Q16D915b%2BtkFkw%3D%3D&returnType=xml&numOfRows=10&pageNo=1&itemCode=CO&dataGubun=DAILY&searchCondition=MONTH",true);
+            request.send();
+        };
+        
+    </script>
+</body>
+</html>

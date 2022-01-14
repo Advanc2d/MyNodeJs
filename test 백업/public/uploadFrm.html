@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <!-- <form method="post" enctype="multipart/formdata" action="/process/upload">
+        <table>
+            <tr>
+                <td><label>파일</label></td>
+                <td><input type="file" name="uploadedFile"></td>
+            </tr>
+        </table>
+        <input type="submit" value="업로드" name="submit">
+    </form> -->
+    <form method="post" enctype="multipart/form-data" action="/process/upload">
+        <table>
+            <tr>
+                <td><label>파일</label></td>
+                <td><input type="file" name="uploadedFile" /></td>
+            </tr>
+        </table>
+        <input type="submit" name="submit" value="업로드" />
+    </form> 
+</body>
+</html>
